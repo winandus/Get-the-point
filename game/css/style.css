@@ -28,7 +28,7 @@ footer, header, hgroup, menu, nav, section {
 body {
   line-height: 1;
   width: 100%;
-  background-color: #fcfcfc;
+  background-color: #ecf0f1;
 }
 ol, ul {
   list-style: none;
@@ -72,5 +72,5 @@ header {width: 100%; margin: auto; text-align: center; margin-top: 20px; margin-
 
 
 .grille-conteneur {position: relative; width: 100%; margin: auto;}
-.ligne {width: 100%; height: 265px; display: block; text-align: center;}
-.case {width:250px; height: 250px; display: inline-block; background-color: #3498db; margin:5px; cursor: pointer;}
+.ligne {width: 100%; height: 250px; display: block; text-align: center;}
+.case {width:235px; height: 235px; display: inline-block; background-color: #3498db; margin:5px; cursor: pointer;}
