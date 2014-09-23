@@ -74,3 +74,5 @@ header {width: 100%; margin: auto; text-align: center; margin-top: 20px; margin-
 .grille-conteneur {position: relative; width: 100%; margin: auto;}
 .ligne {width: 100%; height: 250px; display: block; text-align: center;}
 .case {width:235px; height: 235px; display: inline-block; background-color: #3498db; margin:5px; cursor: pointer;}
+
+footer {position: relative; bottom: 0px; margin: auto; margin-top: 70px; width: 100%; text-align: center;}
