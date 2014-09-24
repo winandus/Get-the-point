@@ -18,53 +18,22 @@
         <!-- JS -->
         <!-- lib-->
         <script type="text/javascript" src="js/lib/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="js/lib/jquery.mixitup.js"></script>
+
+        
         <!-- personnal script -->
         <script type="text/javascript" src="js/actioncase.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                        getClassCase();
-                    });
-        </script>
+        
     </head>
 
-    <body>
+<body>
+    <button type="button"  onclick="makeGrid()">Click Me!</button>
 
-        <section id="global" class="caviar">
+<canvas id="getThePoint" width="785" height="785" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
 
-            <header>
-                <h2 class="char25">Get the point!</h2>
-                <br>
-                <p class="char20">Follow the point under the square!</p>
-            </header>
+<script>
+    
 
-
-
-            <div class="grille-conteneur">
-
-                <div class="ligne">
-                    <div class="case"></div>
-                    <div class="case"></div>
-                    <div class="case"></div>
-                </div>
-
-                <div class="ligne">
-                    <div class="case"></div>
-                    <div class="case"></div>
-                    <div class="case"></div>
-                </div>
-
-                <div class="ligne">
-                    <div class="case"></div>
-                    <div class="case"></div>
-                    <div class="case"></div>
-                </div>
-
-            </div>
-
-        </section>
-
-    </body>
-
-    <footer class="caviar">
-        <p>Copyright © 2014 Get the point! All rights reserved.</p>
-    </footer>
+</script> 
+</body>
