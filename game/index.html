@@ -27,7 +27,15 @@
     </head>
 
 <body>
-    <button type="button"  onclick="makeGrid()">Click Me!</button>
+	<script>
+	$( document ).ready(function() {
+	  initGameGrid();
+	 });
+    	
+
+    </script>
+    <button type="button" onclick="startGame()" >Click Me!</button>
+
 
 <canvas id="getThePoint" width="785" height="785" style="border:1px solid #d3d3d3;">
 Your browser does not support the HTML5 canvas tag.</canvas>

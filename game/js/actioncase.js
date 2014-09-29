@@ -1,58 +1,108 @@
-function makeGrid(){
-        var possible = "ABCDEF0123456789";
-        var color="#";
+var tabCase;
+var x =  0;
+var y = 15;
+var speed = 5;
+var sizeCase = 235;
+var canvasGame;
 
-        var c=document.getElementById("getThePoint");
-        //var ctx=c.getContext("2d");
+var canvasWidth = canvasGame.width;
+var canvasHeight = canvasGame.height;
 
-        var case0 = c.getContext("2d");
-        var case1 = c.getContext("2d");
-        var case2 = c.getContext("2d");
-        var case3 = c.getContext("2d");
-        var case4 = c.getContext("2d");
-        var case5 = c.getContext("2d");
-        var case6 = c.getContext("2d");
-        var case7 = c.getContext("2d");
-        var case8 = c.getContext("2d");
-        var case9 = c.getContext("2d");
+function initGameGrid(){
+    
+	canvasGame=document.getElementById("getThePoint");
 
-        var tabCase = [case0 , case1, case3 , case4 , case5 , case6 , case7 , case8 ,case9];
+	canvasWidth = canvasGame.width;
+	canvasHeight = canvasGame.height;
+    
 
-        //console.log(tabCase);
+    cGetContext = canvasGame.getContext("2d");
 
-        var sizeCase = 235;
-        var caseX = 20;
-        var caseY = 20;
-        for (var i = 0; i <9 ; i++) {
-            for (var j = 3 ; j> 0; j --) {
-                for (var k = 6 ; k > 0; k--) {
-                    color += possible.charAt(Math.floor(Math.random() * possible.length)) ;
+    // init case 
+    var case0 = cGetContext;
+    var case1 = cGetContext;
+    var case2 = cGetContext;
+    var case3 = cGetContext;
+    var case4 = cGetContext;
+    var case5 = cGetContext;
+    var case6 = cGetContext;
+    var case7 = cGetContext;
+    var case8 = cGetContext;
+    var case9 = cGetContext;
 
-                };
-                tabCase[i].fillStyle= color;
-                tabCase[i].fillRect(caseX,caseY,sizeCase,sizeCase);
-                caseX+= sizeCase + 20;
-                //console.log(color);
-                tabCase[i].stroke();
-                color = "#";
-            };
-            caseX =20;
-            caseY += sizeCase + 20;
+    tabCase = [ { caseNB:  case0, casePosY : 0,casePosX : 0},
+    			{ caseNB:  case1, casePosY : 0,casePosX : 0},
+    			{ caseNB:  case3, casePosY : 0,casePosX : 0},
+    			{ caseNB:  case4, casePosY : 0,casePosX : 0},
+    			{ caseNB:  case5, casePosY : 0,casePosX : 0},
+    			{ caseNB:  case6, casePosY : 0,casePosX : 0},
+    			{ caseNB:  case7, casePosY : 0,casePosX : 0},
+    			{ caseNB:  case8, casePosY : 0,casePosX : 0},
+    			{ caseNB:  case9, casePosY : 0,casePosX : 0}];
+
+    var Y = 20, X= 20;
+    
+    var caseX = 20;
+    var caseY = 20;
+
+    //boucle de mise en place des case
+    for (var i = 0; i <tabCase.length; i++) {
+        for (var j = 0 ; j< tabCase.length/3; j ++) {
             
+            drawCase(tabCase[i].caseNB, X, Y, sizeCase, "#3498db");
+            tabCase[i].casePosX += sizeCase + 20;
+            X += sizeCase + 20;
+
+            console.log("positionX : "+X+ "\npositionY : "+ Y);
+            tabCase[i].caseNB.stroke();
         };
-
-
+        tabCase[i].casePosX =20;
+        tabCase[i].casePosY += sizeCase + 20;
         
+        X =  20;
+        Y += sizeCase + 20; 
+    };
+    
+    
+}
 
-        setTimeout(function () {moveCase(tabCase);}, 3000);
-        
-    }
+function changeColorRandom(){
+	var possible = "ABCDEF0123456789";
+    var color="#";
+	for (var k = 0 ; k < 6; k++) {
+        color += possible.charAt(Math.floor(Math.random() * possible.length)) ;
+    };
 
-     function moveCase(caseTab){
+    return color;
+}
 
-            console.log(caseTab);
+function drawCase(selectedCase, caseX, caseY, sizeCase, colorStyle){
+	//selectedCase.clearRect  (0, 0, canvas.width, canvas.height);
+	selectedCase.fillStyle= colorStyle;
+    selectedCase.fillRect(caseX,caseY,sizeCase,sizeCase);
+}
 
-            caseTab[8].translate(70,70);
-            caseTab[7].fillStyle= "#F0F";
+function startGame(){
+	
 
-        }
+	setInterval(function () {moveCase();}, 1000/60);
+}
+
+
+
+function moveCase(){
+	tabCase[0].caseNB.clearRect(0, 0, canvasWidth, canvasHeight);
+	tabCase[0].caseNB.beginPath();
+	tabCase[0].caseNB.beginPath();
+	tabCase[0].caseNB.fillRect(tabCase[0].casePosX,caseY,sizeCase,sizeCase);
+
+}
+
+function animeCase(){
+
+	var time = new Date();
+	tabCase[0].rotate( ((2*Math.PI)/60)*time.getSeconds() + ((2*Math.PI)/60000)*time.getMilliseconds() );
+}
+
+
+
