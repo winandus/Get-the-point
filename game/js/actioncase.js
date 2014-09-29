@@ -58,15 +58,12 @@ function initGameGrid(){
 
             tabCase[k].casePosY = Y;
 
-            console.log(k);
             tabCase[k].caseNB.stroke();
             k++;
         };
         X = 20
         Y += sizeCase + 20; 
     };
-    
-    console.log(tabCase[6]);
 }
 
 function changeColorRandom(){
@@ -88,61 +85,84 @@ function drawCase(selectedCase, caseX, caseY, sizeCase, colorStyle){
 function startGame(){
 	
     
-    var tabNbRandom = Math.floor((Math.random() * 10));
+    var tabNbRandom ;
+    var tabNbRandom2 ;
+    var tabUsedRandom;
+    
+    
+
+    //for (var i = 0; i < tabCase.length-1; i++) {
+        
+        //for (var i = 0; i < 9; i++) {
+            tabNbRandom = Math.floor((Math.random() *8));
+            tabNbRandom2 = Math.floor((Math.random() *8));
+        //};
+        
+
+
+        console.log(tabNbRandom);
+        colorRandom = changeColorRandom();
+
+
+        console.log(tabCase[2]);
+        console.log(tabCase[tabNbRandom]);
+        timerInterval = setInterval(function () {
+
+
+
+
+        moveHorizontal(colorRandom, tabCase[tabNbRandom2], tabCase[tabNbRandom]);
+
+
+
+    }, 0,01);
+    //};
+    
+
+}
+
+
+function moveHorizontal(color, depart, arriver){
 
     
-    console.log("tab number :" + tabNbRandom);
-    console.log(tabCase[8]);
-
-    colorRandom = changeColorRandom();
-	timerInterval = setInterval(function () {moveCase(colorRandom, tabCase[0], tabCase[2])}, 1000/60);
-
-}
-
-
-function moveHorizontal(){
-
-}
-
-function moveVertical(){
-
-}
-
-
-
-function moveCase(color, depart, arriver){
-	depart.caseNB.clearRect(0, 0, canvasWidth, canvasHeight);
-	depart.caseNB.beginPath();
+    depart.caseNB.clearRect(0, 0, canvasWidth, canvasHeight);
+    depart.caseNB.beginPath();
 
     drawCase(depart.caseNB, depart.casePosX, depart.casePosY, sizeCase, color);
 
-    //tabCase[0].casePosX --;
     if (depart.casePosX > arriver.casePosX) {
         if(depart.casePosX != arriver.casePosX){
             depart.casePosX --;
-            return false;
         }  
-        else{
-            clearInterval(timerInterval);
-            return true;
-        }
     }else if(depart.casePosX < arriver.casePosX){
-        console.log("dans le if");
+        
         if(depart.casePosX != arriver.casePosX){
             depart.casePosX ++;
-            return false;
         }  
-        else{
-            clearInterval(timerInterval);
-            return true;
-        }
+
     }else{
-        clearInterval(timerInterval);
-        return true;
+        if (depart.casePosY > arriver.casePosY) {
+            if(depart.casePosY != arriver.casePosY){
+                depart.casePosY --;
+            }  
+            else{
+                clearInterval(timerInterval);
+            }
+        }else if(depart.casePosY < arriver.casePosY){
+            
+            if(depart.casePosY != arriver.casePosY){
+                depart.casePosY++;
+            }  
+            else{
+                clearInterval(timerInterval);
+
+            }
+        }else{
+            clearInterval(timerInterval);
+
+        }
+
     }
-
-    
-
 }
 
 function animeCase(){
