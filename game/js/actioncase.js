@@ -1,12 +1,14 @@
 var tabCase;
-var x =  0;
-var y = 15;
-var speed = 5;
+
+
+
 var sizeCase = 235;
 var canvasGame;
 
-var canvasWidth = canvasGame.width;
-var canvasHeight = canvasGame.height;
+var timerInterval;
+
+var canvasWidth;
+var canvasHeight;
 
 function initGameGrid(){
     
@@ -30,40 +32,41 @@ function initGameGrid(){
     var case8 = cGetContext;
     var case9 = cGetContext;
 
-    tabCase = [ { caseNB:  case0, casePosY : 0,casePosX : 0},
-    			{ caseNB:  case1, casePosY : 0,casePosX : 0},
-    			{ caseNB:  case3, casePosY : 0,casePosX : 0},
-    			{ caseNB:  case4, casePosY : 0,casePosX : 0},
-    			{ caseNB:  case5, casePosY : 0,casePosX : 0},
-    			{ caseNB:  case6, casePosY : 0,casePosX : 0},
-    			{ caseNB:  case7, casePosY : 0,casePosX : 0},
-    			{ caseNB:  case8, casePosY : 0,casePosX : 0},
-    			{ caseNB:  case9, casePosY : 0,casePosX : 0}];
+    tabCase = [ { caseNB:  case0, casePosY : 0,casePosX : 0, boule : false},
+    			{ caseNB:  case1, casePosY : 0,casePosX : 0, boule : false},
+    			{ caseNB:  case3, casePosY : 0,casePosX : 0, boule : false},
+    			{ caseNB:  case4, casePosY : 0,casePosX : 0, boule : false},
+    			{ caseNB:  case5, casePosY : 0,casePosX : 0, boule : false},
+    			{ caseNB:  case6, casePosY : 0,casePosX : 0, boule : false},
+    			{ caseNB:  case7, casePosY : 0,casePosX : 0, boule : false},
+    			{ caseNB:  case8, casePosY : 0,casePosX : 0, boule : false},
+    			{ caseNB:  case9, casePosY : 0,casePosX : 0, boule : false}];
 
     var Y = 20, X= 20;
     
     var caseX = 20;
     var caseY = 20;
+    var k= 0;
 
     //boucle de mise en place des case
-    for (var i = 0; i <tabCase.length; i++) {
+    for (var i = 0; i <tabCase.length/3; i++) {
         for (var j = 0 ; j< tabCase.length/3; j ++) {
             
-            drawCase(tabCase[i].caseNB, X, Y, sizeCase, "#3498db");
-            tabCase[i].casePosX += sizeCase + 20;
+            drawCase(tabCase[k].caseNB, X, Y, sizeCase, "#3498db");
+            tabCase[k].casePosX = X;
             X += sizeCase + 20;
 
-            console.log("positionX : "+X+ "\npositionY : "+ Y);
-            tabCase[i].caseNB.stroke();
+            tabCase[k].casePosY = Y;
+
+            console.log(k);
+            tabCase[k].caseNB.stroke();
+            k++;
         };
-        tabCase[i].casePosX =20;
-        tabCase[i].casePosY += sizeCase + 20;
-        
-        X =  20;
+        X = 20
         Y += sizeCase + 20; 
     };
     
-    
+    console.log(tabCase[6]);
 }
 
 function changeColorRandom(){
@@ -84,17 +87,61 @@ function drawCase(selectedCase, caseX, caseY, sizeCase, colorStyle){
 
 function startGame(){
 	
+    
+    var tabNbRandom = Math.floor((Math.random() * 10));
 
-	setInterval(function () {moveCase();}, 1000/60);
+    
+    console.log("tab number :" + tabNbRandom);
+    console.log(tabCase[8]);
+
+    colorRandom = changeColorRandom();
+	timerInterval = setInterval(function () {moveCase(colorRandom, tabCase[0], tabCase[2])}, 1000/60);
+
+}
+
+
+function moveHorizontal(){
+
+}
+
+function moveVertical(){
+
 }
 
 
 
-function moveCase(){
-	tabCase[0].caseNB.clearRect(0, 0, canvasWidth, canvasHeight);
-	tabCase[0].caseNB.beginPath();
-	tabCase[0].caseNB.beginPath();
-	tabCase[0].caseNB.fillRect(tabCase[0].casePosX,caseY,sizeCase,sizeCase);
+function moveCase(color, depart, arriver){
+	depart.caseNB.clearRect(0, 0, canvasWidth, canvasHeight);
+	depart.caseNB.beginPath();
+
+    drawCase(depart.caseNB, depart.casePosX, depart.casePosY, sizeCase, color);
+
+    //tabCase[0].casePosX --;
+    if (depart.casePosX > arriver.casePosX) {
+        if(depart.casePosX != arriver.casePosX){
+            depart.casePosX --;
+            return false;
+        }  
+        else{
+            clearInterval(timerInterval);
+            return true;
+        }
+    }else if(depart.casePosX < arriver.casePosX){
+        console.log("dans le if");
+        if(depart.casePosX != arriver.casePosX){
+            depart.casePosX ++;
+            return false;
+        }  
+        else{
+            clearInterval(timerInterval);
+            return true;
+        }
+    }else{
+        clearInterval(timerInterval);
+        return true;
+    }
+
+    
 
 }
 
